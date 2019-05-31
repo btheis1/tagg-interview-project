@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 
 class CreateChore extends Component {
@@ -24,7 +25,16 @@ class CreateChore extends Component {
         console.log(`Due date: ${this.state.dueDate}`);
         console.log(`Completed: ${this.state.completed}`);
 
-        //backend logic here
+        const newChore = {
+            description: this.state.description,
+            assignee: this.state.assignee,
+            dueDate: this.state.dueDate,
+            completed: this.state.completed
+
+        }
+
+        axios.post("http://localhost:3001/chores/add", newChore)
+            .then(res => console.log(res.data));
 
         this.setState({
             description: "",

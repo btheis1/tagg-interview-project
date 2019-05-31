@@ -2,12 +2,13 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const choreRoutes = express.Router();
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
 let Chore = require("./chore-model")
 //middleware
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(bodyParser.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/chores", { useNewUrlParser: true })

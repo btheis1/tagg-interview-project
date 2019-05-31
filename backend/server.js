@@ -24,7 +24,8 @@ choreRoutes.route("/").get(function(req, res) {
         } else {
             res.json(chores);
         }
-    });
+    })
+    .sort({ dueDate: 1 })
 });
 
 choreRoutes.route("/add").post(function(req, res) {

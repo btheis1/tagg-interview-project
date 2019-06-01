@@ -1,18 +1,27 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import DeleteBtn from "./delete-chore";
+
 
 const Chore = props => (
     <tr>
         <td className={props.chore.completed ? "completed" : ""}>{props.chore.description}</td>
         <td className={props.chore.completed ? "completed" : ""}>{props.chore.assignee}</td>
         <td className={props.chore.completed ? "completed" : ""}>{props.chore.dueDate}</td>
-        <td><span className="glyphicon glyphicon-ok"></span></td> 
+        <td className={props.chore.completed ? "completed" : ""}>{props.chore.completed}</td>
+        <td>
+            <Link to={"/edit/" + props.chore._id}>Edit</Link>
+        </td>
+        <td>
+            <DeleteBtn />
+        </td>
     </tr>
 )
 
 class ChoreDashboard extends Component {
    state = {chores: []}
+
    
    componentDidMount() {
        axios.get("http://localhost:3001/chores/")
@@ -24,10 +33,19 @@ class ChoreDashboard extends Component {
             console.log(err)
         });
     }
+
+
+    deleteChore() {
+        console.log("Delete button clicked!")
+        // axios.post("http://localhost:3001/chores/delete/" + this.chore._id)
+        //  .then(res => console.log("Chore deleted"))
+
+        // this.props.history.push("/");
+    }
     
     choreDashboard() {
         return this.state.chores.map(function(currentChore, i) {
-            return <Chore chore={currentChore} key={i} />
+            return <Chore chore={currentChore} key={i}/>
         });
     }
 

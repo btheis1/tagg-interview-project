@@ -71,6 +71,22 @@ choreRoutes.route("/update/:id").post(function(req, res) {
     });
 });
 
+choreRoutes.route("/delete/:id").post(function(req, res) {
+    Chore.findById(req.params.id, function(err, chore) {
+        if (!chore) {
+            res.status(404).send("No chores found")
+        } else {
+            chore.remove()
+             .then(chore => {
+                 res.json("Chore deleted!")
+             })
+             .catch(err => {
+                 res.status(400).then("Delete failed")
+             })
+        }
+    })
+})
+
 app.use("/chores", choreRoutes)
 
 

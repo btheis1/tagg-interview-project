@@ -26,6 +26,7 @@ class App extends Component {
             <Route path="/" exact component={ChoreDashboard} />
             <Route path="/edit/:id" component={EditChore} />
             <Route path="/create" component={CreateChore} />
+            
         </div>
       </Router>
     );
